@@ -1,4 +1,29 @@
-# My Mac Status — Community Fork
+<div align="center">
+
+<img src="docs/assets/app-icon.png" alt="My Mac Status app icon" width="120" />
+
+# My Mac Status
+
+**Know your Mac at a glance.**
+
+A friendly, native SwiftUI app for macOS health, battery, storage, hardware details, and read-only device-management information.
+
+![My Mac Status social preview](docs/assets/social-preview.png)
+
+![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue) ![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-brightgreen) ![SwiftUI](https://img.shields.io/badge/SwiftUI-native-orange) [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+</div>
+
+## Screenshots
+
+**Screenshots are being prepared.** Images in this section will be actual captures of the validated macOS application, not conceptual mockups. See [screenshot capture instructions](docs/assets/screenshots/README.md).
+
+<!-- Once genuine screenshots are added, uncomment these lines:
+![Dashboard](docs/assets/screenshots/dashboard.png)
+![Mac Health](docs/assets/screenshots/mac-health.png)
+![Battery Health](docs/assets/screenshots/battery-health.png)
+![Storage](docs/assets/screenshots/storage.png)
+-->
 
 An **unbranded, MDM-agnostic** macOS SwiftUI application for local device health, battery information, storage inspection, hardware details and **read-only** enrollment diagnostics.
 
@@ -46,11 +71,6 @@ See [FORK_NOTES.md](FORK_NOTES.md) and [SECURITY.md](SECURITY.md). Community edi
 ## License
 
 Licensed under the [MIT License](LICENSE). Copyright (c) 2026 Ethan Besbris.
-
-The author has selected MIT for this Community Edition. Before making this
-repository public, confirm that any employer agreements and third-party artwork
-rights permit distribution; the license cannot grant rights the licensor does
-not hold.
 
 ## Validation build kit
 

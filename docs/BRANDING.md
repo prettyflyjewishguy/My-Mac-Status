@@ -1,8 +1,10 @@
-# Optional branding
+# Branding & customization
 
-Default: generic My Mac Status name and blue Mac-and-heart icon; no company logo or service desk destination.
+My Mac Status ships with a generic look and supports optional build-time customization.
 
-Set public, nonsecret build-time settings:
+To customize the application icon, replace `Resources/AppIcon.png` before building. To add a brand logo, provide `Resources/BrandLogo.png`.
+
+To customize the displayed organization and support details, run:
 
 ```zsh
 MYMACSTATUS_BRAND_NAME='Example IT' \
@@ -12,4 +14,6 @@ MYMACSTATUS_SUPPORT_URL='https://support.example.org' \
 zsh Scripts/build_on_mac.zsh
 ```
 
-Place optional `Resources/BrandLogo.png` to show an organization logo; replace `Resources/AppIcon.png` to change the application icon. Do not commit private corporate artwork without permission. The icon itself requires separate provenance clearance before publishing this fork.
+The application uses the system accent color by default. Additional styling can be changed in `Sources/Components/CompanionStyle.swift`.
+
+Custom branding is optional; the default application works without it.

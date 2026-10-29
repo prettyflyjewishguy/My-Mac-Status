@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/readme-banner.png" alt="My Mac Status — Know your Mac at a glance" width="100%" />
+![My Mac Status](docs/assets/social-preview.png)
 
 **Know your Mac at a glance.**
 
@@ -9,6 +9,21 @@ A friendly, native macOS app that makes it easy to check your Mac’s health, ba
 ![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue) ![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-brightgreen) ![SwiftUI](https://img.shields.io/badge/SwiftUI-native-orange) [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 </div>
+
+## Releases and development
+
+| Edition | Branch | Status | External MDM integrations |
+| --- | --- | --- | --- |
+| **Community Edition v1.0.0** | `main` | Stable baseline | **Not included** |
+| **Community Edition v1.1.1** | [`development/v1.1.1-managed-integrations`](https://github.com/prettyflyjewishguy/My-Mac-Status/tree/development/v1.1.1-managed-integrations) | Development candidate | **Being adapted and tested** |
+
+**What works on `main`:** The standalone Community Edition provides local Mac health, battery, storage, hardware information, and read-only management diagnostics. It does **not** authenticate to Jamf Pro, Apple Business Manager, Iru/Kandji, or Microsoft Intune to retrieve inventory or lifecycle records. No MDM API credentials or external gateway are needed for its local features.
+
+**Production heritage:** The separate internal enterprise edition deployed at my organization has working **Jamf Pro** and **Apple Business Manager (ABM)** integrations for managed inventory and device lifecycle / estimated replacement information. This is production experience with the *internal implementation*, **not** a claim that those integrations ship in the public `main` branch.
+
+**What's next:** The v1.1.1 development branch is adapting that proven functionality into an optional, organization-neutral **gateway architecture**. Work includes Jamf Pro and ABM integration, with Iru/Kandji and Microsoft Intune support being developed. The public gateway, cross-provider adapters, packaging, and end-to-end operation still require their own validation. Local app features will continue to work without a gateway.
+
+> **Release policy:** `main` remains the stable Community Edition. Development code will not be merged or described as production-ready until it has been built, tested, and approved.
 
 ## Take a look
 

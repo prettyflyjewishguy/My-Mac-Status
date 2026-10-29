@@ -1,6 +1,6 @@
 <div align="center">
 
-![My Mac Status](docs/assets/social-preview.png)
+<img src="docs/assets/readme-banner.png" alt="My Mac Status — Know your Mac at a glance" width="100%" />
 
 **Know your Mac at a glance.**
 

@@ -18,7 +18,7 @@ The `main` branch is the **stable, standalone Community Edition**. It offers loc
 
 ### Help expand MDM support
 
-I'd love to collaborate with other Mac admins and developers to bring optional integrations to more management platforms—including **Jamf Pro, Apple Business Manager, Iru/Kandji, Microsoft Intune**, and others suggested by the community.
+I’d love to collaborate with other Mac admins and developers to bring MDM integration capabilities to the Community Edition. This includes adapting the existing Jamf Pro and Apple Business Manager functionality into a configurable, organization-independent solution, while exploring support for additional platforms such as **Iru/Kandji, Microsoft Intune**, and others suggested by the community.
 
 Have experience with an MDM provider, its APIs, authentication, or device lifecycle data? [Propose an MDM integration](https://github.com/prettyflyjewishguy/My-Mac-Status/issues/new/choose), review [CONTRIBUTING.md](CONTRIBUTING.md), or open a pull request. We can work together on designs before anyone writes code.
 

@@ -10,20 +10,25 @@ A friendly, native macOS app that makes it easy to check your Mac’s health, ba
 
 </div>
 
-## Releases and development
+## Community Edition · v1.0.0
 
-| Edition | Branch | Status | External MDM integrations |
-| --- | --- | --- | --- |
-| **Community Edition v1.0.0** | `main` | Stable baseline | **Not included** |
-| **Community Edition v1.1.1** | [`development/v1.1.1-managed-integrations`](https://github.com/prettyflyjewishguy/My-Mac-Status/tree/development/v1.1.1-managed-integrations) | Development candidate | **Being adapted and tested** |
+The `main` branch is the **stable, standalone Community Edition**. It offers local Mac health, battery, storage, hardware information, and read-only management diagnostics. **No MDM server, API credentials, or external gateway is required.**
 
-**What works on `main`:** The standalone Community Edition provides local Mac health, battery, storage, hardware information, and read-only management diagnostics. It does **not** authenticate to Jamf Pro, Apple Business Manager, Iru/Kandji, or Microsoft Intune to retrieve inventory or lifecycle records. No MDM API credentials or external gateway are needed for its local features.
+**External MDM integrations are not included in v1.0.0.** My Mac Status grew from a separate internal enterprise application where Jamf Pro and Apple Business Manager (ABM) integrations are used in production for device inventory and lifecycle information. Those internal integrations are **not** part of this public release.
 
-**Production heritage:** The separate internal enterprise edition deployed at my organization has working **Jamf Pro** and **Apple Business Manager (ABM)** integrations for managed inventory and device lifecycle / estimated replacement information. This is production experience with the *internal implementation*, **not** a claim that those integrations ship in the public `main` branch.
+### Help expand MDM support
 
-**What's next:** The v1.1.1 development branch is adapting that proven functionality into an optional, organization-neutral **gateway architecture**. Work includes Jamf Pro and ABM integration, with Iru/Kandji and Microsoft Intune support being developed. The public gateway, cross-provider adapters, packaging, and end-to-end operation still require their own validation. Local app features will continue to work without a gateway.
+I'd love to collaborate with other Mac admins and developers to bring optional integrations to more management platforms—including **Jamf Pro, Apple Business Manager, Iru/Kandji, Microsoft Intune**, and others suggested by the community.
 
-> **Release policy:** `main` remains the stable Community Edition. Development code will not be merged or described as production-ready until it has been built, tested, and approved.
+Have experience with an MDM provider, its APIs, authentication, or device lifecycle data? [Propose an MDM integration](https://github.com/prettyflyjewishguy/My-Mac-Status/issues/new/choose), review [CONTRIBUTING.md](CONTRIBUTING.md), or open a pull request. We can work together on designs before anyone writes code.
+
+Any future integration should remain **optional**: local features must continue to work without MDM connectivity. Please don't share production credentials, tenant details, device serial numbers, or proprietary code in public issues.
+
+### Support development ☕
+
+My Mac Status is free and open source. If it's useful to you and you'd like to support ongoing development, you can [**buy me a coffee via Venmo**](https://venmo.com/u/bigdaddybesbris). Contributions are entirely optional and do not affect access to features or collaboration.
+
+> This support link goes to **Venmo**, not Buy Me a Coffee.
 
 ## Take a look
 

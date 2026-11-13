@@ -32,11 +32,10 @@ Screenshots from My Mac Status CE 2.0 on macOS. The app supports light and dark 
 | <img src="Screenshots/battery.png" alt="Battery health and power" width="100%"> | <img src="Screenshots/storage.png" alt="Storage overview and home-folder analysis" width="100%"> |
 | **Diagnostics** | **macOS Update Intelligence** |
 | <img src="Screenshots/diagnostics.png" alt="Read-only diagnostics" width="100%"> | <img src="Screenshots/health-security-update-intelligence.png" alt="macOS Update Intelligence" width="100%"> |
+| **Custom Branding — Prettyfly Showcase** | **Settings & Connections** |
+| <img src="Screenshots/prettyfly-branding-showcase.png" alt="My Mac Status CE 2.0 with custom Prettyfly branding and purple managed accent colors" width="100%"> | <img src="Screenshots/settings-connections.png" alt="Optional management provider connections" width="100%"> |
 
-
-### Settings & Connections
-
-<p align="center"><img src="Screenshots/settings-connections.png" alt="Optional management provider connections" width="85%"></p>
+The Prettyfly screenshot demonstrates optional organization branding and managed accent colors; the default My Mac Status experience remains available without an MDM profile.
 
 <details>
 <summary><strong>Additional screenshots — Help & Documentation (3 images)</strong></summary>

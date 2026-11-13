@@ -21,7 +21,7 @@
 | PUB-02 | BLOCKER | No verified redistribution rights for app icon or other derived artwork. | Confirm rights or replace with independently licensed artwork. |
 | PUB-03 | BLOCKER | MIT license selected by author; employer/third-party rights not independently verified. | MIT LICENSE added at author’s direction; verify all rights before publication. |
 | PUB-04 | MEDIUM | Source includes legacy `Companion*` Swift type/file names and references to the internal edition in docs. | Review public-facing narrative and decide whether to rename internal symbols in a **future** functional branch; not required for compilation. |
-| PUB-05 | MEDIUM | Bundle identifier `org.example.mymacstatus` is a placeholder. | Select a unique reverse-DNS ID before publishing distributable binaries; this changes install identity. |
+| PUB-05 | MEDIUM | Bundle identifier `com.prettyfly.mymacstatus` is a placeholder. | Select a unique reverse-DNS ID before publishing distributable binaries; this changes install identity. |
 | PUB-06 | MEDIUM | No tested CI run on hosted macOS runner. | Enable and test the included workflow after repository creation. |
 | PUB-07 | MEDIUM | App is ad-hoc signed; PKG unsigned and unnotarized. | Document distribution limitations; decide whether to offer source-only initially. |
 | PUB-08 | LOW | Support contact and security reporting destination not set. | Configure private vulnerability reporting and maintainer contact before public release. |

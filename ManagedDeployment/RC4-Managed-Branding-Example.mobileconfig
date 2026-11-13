@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>BrandingEnabled</key>
+			<true/>
+			<key>BrandingImageHeight</key>
+			<integer>48</integer>
+			<key>BrandingImageURL</key>
+			<string>https://assets.example.com/brand/logo.png</string>
+			<key>BrandingImageURLDark</key>
+			<string>https://assets.example.com/brand/logo-dark.png</string>
+			<key>BrandingImageURLLight</key>
+			<string>https://assets.example.com/brand/logo-light.png</string>
+			<key>BrandingImageWidth</key>
+			<integer>165</integer>
+			<key>HideHelpAndDocumentation</key>
+			<true/>
+			<key>HideSettingsAndConnections</key>
+			<true/>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>com.prettyfly.mymacstatus.branding</string>
+			<key>PayloadType</key>
+			<string>com.prettyfly.mymacstatus</string>
+			<key>PayloadUUID</key>
+			<string>53B03686-D7E4-4804-ABB1-27751DC2A965</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>My Mac Status CE — Managed Branding Example</string>
+	<key>PayloadIdentifier</key>
+	<string>com.prettyfly.mymacstatus.rc4.sample</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>93962E4A-9F8C-40FA-ADB7-2B42FC3E9E59</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

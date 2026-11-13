@@ -10,7 +10,7 @@ struct MacHealthView: View {
             HStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Your Mac's health").font(.title3.weight(.semibold))
-                    Text("Check key settings and protection on your Mac.")
+                    Text("Check key settings and protection on your Mac. Management status is informational.")
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -28,13 +28,16 @@ struct MacHealthView: View {
                 Text("Last checked: \(date.formatted(date: .abbreviated, time: .shortened))")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            // Feature 2.3 Fix 1: show the diagnostic entry point above the health-card grid.
+            // This must remain visible without scrolling past Security & Compliance.
+            UpdateIntelligenceView()
             LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 ForEach(model.macHealth.checks) { item in
-                    InfoPanel {
+                    InfoPanel(tint: item.id == "mdm" ? CompanionStyle.StatusTone.informational.color : CompanionStyle.StatusTone(severity: item.severity).color) {
                         HStack(alignment: .top, spacing: 12) {
                             Image(systemName: item.symbol)
                                 .font(.title3)
-                                .foregroundStyle(color(item.severity))
+                                .foregroundStyle(item.id == "mdm" ? CompanionStyle.StatusTone.informational.color : CompanionStyle.StatusTone(severity: item.severity).color)
                                 .frame(width: 26)
                             VStack(alignment: .leading, spacing: 7) {
                                 HStack(alignment: .top, spacing: 8) {
@@ -56,10 +59,10 @@ struct MacHealthView: View {
                                         .help("Open System Settings → General → Software Update")
                                     }
                                 }
-                                Text(item.id == "updates" && item.value == "No updates offered" ? "Your Mac is up to date" : item.value).font(.headline)
-                                Label(label(item.severity), systemImage: icon(item.severity))
+                                Text(item.id == "updates" && (item.value == "No updates offered" || item.value == "Your Mac is up to date") ? "No updates available right now" : item.value).font(.headline)
+                                Label(item.id == "mdm" ? "Informational" : label(item.severity), systemImage: item.id == "mdm" ? "info.circle" : icon(item.severity))
                                     .font(.caption.weight(.medium))
-                                    .foregroundStyle(color(item.severity))
+                                    .foregroundStyle(item.id == "mdm" ? CompanionStyle.StatusTone.informational.color : CompanionStyle.StatusTone(severity: item.severity).color)
                                 Text(friendlyDetail(item)).font(.caption).foregroundStyle(.secondary)
                                     .fixedSize(horizontal: false, vertical: true)
                                 Spacer(minLength: 0)
@@ -77,7 +80,7 @@ struct MacHealthView: View {
             }
             InfoPanel {
                 HStack(alignment: .top, spacing: 10) {
-                    Image(systemName: "info.circle.fill").foregroundStyle(CompanionStyle.green)
+                    Image(systemName: "info.circle.fill").foregroundStyle(CompanionStyle.StatusTone.informational.color)
                     Text("Some information may not be available during a scan. Refresh to check again.")
                         .font(.callout)
                 }
@@ -90,12 +93,12 @@ struct MacHealthView: View {
         case "filevault": return "Disk Encryption"
         case "sip": return "System Protection"
         case "mdm": return "Device Management"
-        case "mdm": return "Management Software"
         default: return item.title
         }
     }
     private func friendlyDetail(_ item: MacHealthCheck) -> String {
-        if item.id == "mdm" && item.severity == .healthy { return "your organization’s device management software is installed." }
+        if item.id == "mdm" && item.value == "Not Managed" { return "This Mac isn’t enrolled in device management. That’s normal for personal Macs." }
+        if item.id == "mdm" && item.value == "Enrolled" { return "This Mac is enrolled in device management. Enrollment status is separate from device health." }
         if item.id == "filevault" && item.severity == .healthy { return "Your Mac’s storage is protected with encryption." }
         if item.id == "sip" && item.severity == .healthy { return "Your Mac’s built-in system protection is enabled." }
         if item.id == "updates" {
@@ -121,14 +124,6 @@ struct MacHealthView: View {
         case .needsAttention: return "exclamationmark.triangle.fill"
         case .unhealthy: return "xmark.circle.fill"
         case .unableToVerify: return "questionmark.circle.fill"
-        }
-    }
-    private func color(_ severity: CheckSeverity) -> Color {
-        switch severity {
-        case .healthy: return CompanionStyle.green
-        case .needsAttention: return .orange
-        case .unhealthy: return .red
-        case .unableToVerify: return .secondary
         }
     }
 }

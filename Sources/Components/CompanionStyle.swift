@@ -9,16 +9,46 @@ enum CommunityBranding {
 }
 
 enum CompanionStyle {
-    static let green = Color.accentColor
+    static let green = Color.green
     static let card = Color.primary.opacity(0.045)
+    // Presentation-only palette; status and management decisions remain in their existing models.
+    static var blue: Color { ManagedThemeManager.shared.primary }
+    static var teal: Color { ManagedThemeManager.shared.secondary }
+    static let purple = Color.purple
+    static let orange = Color.orange
+    static func tintedCard(_ tint: Color) -> Color { tint.opacity(0.075) }
+    // Semantic presentation tokens only. These do not classify or calculate device health.
+    enum StatusTone {
+        case healthy, warning, critical, informational, unavailable
+
+        var color: Color {
+            switch self {
+            case .healthy: return .green
+            case .warning: return .orange
+            case .critical: return .red
+            case .informational: return .blue
+            case .unavailable: return .secondary
+            }
+        }
+    }
+
+    static func statusBackground(_ tone: StatusTone) -> Color {
+        tone.color.opacity(0.085)
+    }
+    static func statusBorder(_ tone: StatusTone) -> Color {
+        tone.color.opacity(0.14)
+    }
+    static func statusText(_ tone: StatusTone) -> Color { tone.color }
     static let radius: CGFloat = 13
 }
 
 struct CompanionLogo: View {
     var body: some View {
         Group {
-            if let url = Bundle.main.url(forResource: "BrandLogo", withExtension: "png"),
-               let image = NSImage(contentsOf: url) {
+            if ManagedConfiguration.brandingEnabled {
+                ManagedBrandImage()
+            } else if let url = Bundle.main.url(forResource: "BrandLogo", withExtension: "png"),
+                      let image = NSImage(contentsOf: url) {
                 Image(nsImage: image).resizable().scaledToFit()
             } else {
                 Label(CommunityBranding.name, systemImage: "laptopcomputer")
@@ -52,7 +82,7 @@ struct MetricCard: View {
     let title: String
     let value: String
     let symbol: String
-    var color: Color = CompanionStyle.green
+    var color: Color = CompanionStyle.blue
     var explanation: String? = nil
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
@@ -72,7 +102,8 @@ struct MetricCard: View {
         }
         .padding(15)
         .frame(maxWidth: .infinity, minHeight: 74, alignment: .leading)
-        .background(CompanionStyle.card, in: RoundedRectangle(cornerRadius: CompanionStyle.radius))
+        .background(CompanionStyle.tintedCard(color), in: RoundedRectangle(cornerRadius: CompanionStyle.radius))
+        .overlay(RoundedRectangle(cornerRadius: CompanionStyle.radius).strokeBorder(color.opacity(0.11)))
     }
 }
 
@@ -88,10 +119,49 @@ struct StatusPill: View {
 }
 
 struct InfoPanel<Content: View>: View {
+    var tint: Color = .clear
     let content: Content
-    init(@ViewBuilder content: () -> Content) { self.content = content() }
+    init(tint: Color = .clear, @ViewBuilder content: () -> Content) { self.tint = tint; self.content = content() }
     var body: some View {
         content.padding(18).frame(maxWidth: .infinity, alignment: .leading)
-            .background(CompanionStyle.card, in: RoundedRectangle(cornerRadius: CompanionStyle.radius))
+            .background(tint == .clear ? CompanionStyle.card : CompanionStyle.tintedCard(tint), in: RoundedRectangle(cornerRadius: CompanionStyle.radius))
+            .overlay(RoundedRectangle(cornerRadius: CompanionStyle.radius).strokeBorder(tint.opacity(0.10)))
+    }
+}
+
+// UI-only mapping. Severity is still computed exclusively by existing services/models.
+extension CompanionStyle.StatusTone {
+    init(severity: CheckSeverity) {
+        switch severity {
+        case .healthy: self = .healthy
+        case .needsAttention: self = .warning
+        case .unhealthy: self = .critical
+        case .unableToVerify: self = .unavailable
+        }
+    }
+    init(health: HealthStatus) {
+        switch health {
+        case .healthy: self = .healthy
+        case .needsAttention: self = .warning
+        case .unhealthy: self = .critical
+        case .unableToVerify, .notEvaluated: self = .unavailable
+        }
+    }
+}
+
+struct StatusSurface<Content: View>: View {
+    let tone: CompanionStyle.StatusTone
+    let content: Content
+    init(_ tone: CompanionStyle.StatusTone, @ViewBuilder content: () -> Content) {
+        self.tone = tone
+        self.content = content()
+    }
+    var body: some View {
+        content
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(CompanionStyle.statusBackground(tone), in: RoundedRectangle(cornerRadius: CompanionStyle.radius))
+            .overlay(RoundedRectangle(cornerRadius: CompanionStyle.radius)
+                .strokeBorder(CompanionStyle.statusBorder(tone)))
     }
 }

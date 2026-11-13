@@ -18,9 +18,9 @@ struct BatterySnapshot {
     var advice: String {
         let state = condition.lowercased()
         if state.contains("service") || state.contains("replace") || state.contains("poor") {
-            return "Your Mac reports a battery that may need service. Contact the support team for help."
+            return "Your Mac reports a battery that may need service. Review Battery Health in System Settings or contact Apple Support."
         }
-        return "Experiencing battery or charging issues? Contact the support team."
+        return "Experiencing battery or charging issues? Review Battery settings or contact Apple Support."
     }
 }
 

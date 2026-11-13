@@ -25,8 +25,16 @@ enum DeviceInfoService {
             IOObjectRelease(service)
         }
         let root = URL(fileURLWithPath: NSHomeDirectory())
-        if let values = try? root.resourceValues(forKeys: [.volumeAvailableCapacityKey, .volumeTotalCapacityKey]) {
+        // The ordinary available-capacity key excludes some purgeable space. The
+        // important-usage capacity is closer to the value shown in macOS Storage.
+        // Keep the two measurements distinct rather than relabeling free blocks.
+        if let values = try? root.resourceValues(forKeys: [
+            .volumeAvailableCapacityKey,
+            .volumeAvailableCapacityForImportantUsageKey,
+            .volumeTotalCapacityKey
+        ]) {
             info.freeBytes = values.volumeAvailableCapacity.map(Int64.init)
+            info.availableBytes = values.volumeAvailableCapacityForImportantUsage
             info.totalBytes = values.volumeTotalCapacity.map(Int64.init)
         }
         info.captured = Date()

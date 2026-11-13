@@ -60,7 +60,7 @@ enum MacHealthService {
         let r = run("/usr/bin/profiles", ["status", "-type", "enrollment"])
         let text = r.output.lowercased()
         if text.contains("mdm enrollment: yes") { return check("mdm", "MDM Enrollment", "Enrolled", .healthy, "Your Mac is enrolled in your organization’s device management.", "building.2.crop.circle") }
-        if text.contains("mdm enrollment: no") { return check("mdm", "MDM Enrollment", "Not enrolled", .unhealthy, "macOS reports that this Mac is not MDM-enrolled.", "building.2.crop.circle") }
+        if text.contains("mdm enrollment: no") { return check("mdm", "MDM Enrollment", "Not Managed", .healthy, "Management is optional unless your organization requires enrollment.", "building.2.crop.circle") }
         return check("mdm", "MDM Enrollment", "Information unavailable", .unableToVerify, "Enrollment information is temporarily unavailable.", "building.2.crop.circle")
     }
 

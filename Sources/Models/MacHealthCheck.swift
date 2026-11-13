@@ -20,7 +20,7 @@ struct MacHealthSnapshot {
     // excludes routine software-update maintenance from overall device health.
     private func status(excludingIDs excluded: Set<String>) -> HealthStatus {
         guard checkedAt != nil else { return .notEvaluated }
-        let included = checks.filter { !excluded.contains($0.id) }
+        let included = checks.filter { !excluded.contains($0.id) && $0.id != "mdm" }
         if included.contains(where: { $0.severity == .unhealthy }) { return .unhealthy }
         if included.contains(where: { $0.severity == .needsAttention }) { return .needsAttention }
         if included.contains(where: { $0.severity == .unableToVerify }) { return .unableToVerify }

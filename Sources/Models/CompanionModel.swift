@@ -2,6 +2,8 @@ import SwiftUI
 
 @MainActor final class CompanionModel: ObservableObject {
     @Published var selection: CompanionPage? = .dashboard
+    @Published var managementExpectation: ManagementExpectation = .automatic
+    @Published var diagnosticHistory: [CommunityDiagnosticRecord] = []
     @Published var battery = BatterySnapshot()
     @Published var device = DeviceInfo()
     @Published var loading = false
@@ -14,6 +16,21 @@ import SwiftUI
     @Published var storageSelectedTab = 0
     @Published var storage = StorageSnapshot()
     @Published var lastRefresh: Date?
+    @Published var lifecycle = CommunityLifecycleState()
+    func refreshLifecycle() {
+        guard !lifecycle.loading else { return }
+        lifecycle.loading = true
+        lifecycle.error = nil
+        lifecycle.data = nil
+        let serial = device.serial
+        Task {
+            do { lifecycle.data = try await CommunityLifecycleService.lookup(serial: serial) }
+            catch { lifecycle.error = error.localizedDescription }
+            lifecycle.lastUpdated = Date()
+            lifecycle.loading = false
+        }
+    }
+
 
     func scanStorage() {
         guard !storage.isScanning else { return }

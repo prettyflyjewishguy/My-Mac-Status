@@ -13,7 +13,7 @@ struct StorageView: View {
             Text("Find large files and folders to help manage your storage. No files will be changed or removed.")
                 .foregroundStyle(.secondary)
             HStack(spacing: 12) {
-                MetricCard(title: "Free Storage", value: formatted(model.device.freeBytes), symbol: "internaldrive")
+                MetricCard(title: model.device.availableBytes == nil ? "Free Storage" : "Available Storage", value: formatted(model.device.availableBytes ?? model.device.freeBytes), symbol: "internaldrive")
                 MetricCard(title: "Total Storage", value: formatted(model.device.totalBytes), symbol: "externaldrive")
             }
             InfoPanel {

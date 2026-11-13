@@ -31,9 +31,9 @@ struct DashboardView: View {
             }
             HStack(spacing: 15) {
                 Image(systemName: "laptopcomputer")
-                    .font(.system(size: 35)).foregroundStyle(CompanionStyle.green)
+                    .font(.system(size: 35)).foregroundStyle(CompanionStyle.blue)
                     .frame(width: 56, height: 56)
-                    .background(CompanionStyle.green.opacity(0.11), in: RoundedRectangle(cornerRadius: 14))
+                    .background(CompanionStyle.blue.opacity(0.11), in: RoundedRectangle(cornerRadius: 14))
                 VStack(alignment: .leading, spacing: 5) {
                     Text(device.computerName).font(.title2.bold()).textSelection(.enabled)
                     Text("\(device.model)  ·  \(device.macOS)")
@@ -44,7 +44,7 @@ struct DashboardView: View {
             }
             .padding(18)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(CompanionStyle.green.opacity(0.07), in: RoundedRectangle(cornerRadius: 16))
+            .background(CompanionStyle.StatusTone(health: dashboardStatus).color.opacity(0.07), in: RoundedRectangle(cornerRadius: 16))
 
             Text("Quick actions & status").font(.headline)
             LazyVGrid(columns: columns, spacing: 12) {
@@ -52,17 +52,17 @@ struct DashboardView: View {
                      symbol: "heart.text.square.fill", tint: dashboardStatus.color, page: .macHealth)
                 tile("Battery", value: battery.charge.map { "\($0)% charged" } ?? "Unavailable",
                      detail: "Condition: \(battery.condition)", symbol: "battery.100percent",
-                     tint: BatteryPresentation.color(battery.condition), page: .batteryHealth)
-                tile("Storage", value: size(device.freeBytes) + " free",
+                     tint: .blue, page: .batteryHealth)
+                tile("Storage", value: size(device.availableBytes ?? device.freeBytes) + (device.availableBytes == nil ? " free" : " available"),
                      detail: "of \(size(device.totalBytes)) total", symbol: "internaldrive.fill",
-                     tint: .blue, page: .storage)
+                     tint: .teal, page: .storage)
                 tile("Mac Details", value: "Device details", detail: "View hardware information",
                      symbol: "checkmark.shield.fill", tint: .purple, page: .appleCare)
             }
 
             HStack(spacing: 12) {
                 Image(systemName: updateCheck?.severity == .needsAttention ? "arrow.down.circle.fill" : "arrow.triangle.2.circlepath.circle.fill")
-                    .font(.title2).foregroundStyle(updateCheck?.severity == .needsAttention ? .orange : .blue)
+                    .font(.title2).foregroundStyle(updateTone.color)
                     .frame(width: 34)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Software Updates").font(.subheadline.weight(.semibold))
@@ -81,10 +81,11 @@ struct DashboardView: View {
                     .controlSize(.small)
             }
             .padding(16)
-            .background(Color.blue.opacity(0.06), in: RoundedRectangle(cornerRadius: 13))
+            .background(CompanionStyle.statusBackground(updateTone), in: RoundedRectangle(cornerRadius: 13))
+            .overlay(RoundedRectangle(cornerRadius: 13).strokeBorder(CompanionStyle.statusBorder(updateTone)))
 
             HStack(spacing: 10) {
-                Image(systemName: "info.circle.fill").foregroundStyle(CompanionStyle.green)
+                Image(systemName: "info.circle.fill").foregroundStyle(CompanionStyle.StatusTone.informational.color)
                 Text("Select any card to explore your Mac’s health, storage, and more.")
                     .font(.caption).foregroundStyle(.secondary)
             }
@@ -92,6 +93,10 @@ struct DashboardView: View {
         }
     }
 
+    private var updateTone: CompanionStyle.StatusTone {
+        guard let updateCheck else { return .unavailable }
+        return CompanionStyle.StatusTone(severity: updateCheck.severity)
+    }
     private var dashboardStatus: HealthStatus { model.macHealth.dashboardSummary }
     private var healthText: String { dashboardStatus.rawValue }
     private var healthDetail: String {

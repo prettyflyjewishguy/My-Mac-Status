@@ -30,7 +30,7 @@
 | Uninstall | App removal behavior documented; no daemon leftovers | |
 
 ## Security and release gates
-- Verify compiled bundle identifier `org.example.mymacstatus` is replaced with an identifier controlled by the publisher **before public release**.
+- Verify compiled bundle identifier `com.prettyfly.mymacstatus` is replaced with an identifier controlled by the publisher **before public release**.
 - Confirm authorization to publish Veeam-derived source and assets; choose a license.
 - Run repository and package secret scans; review all hits manually.
 - Review PPPC prompts from storage scanning; do not automatically grant Full Disk Access.

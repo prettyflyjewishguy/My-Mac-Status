@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>PayloadIdentifier</key>
+	<string>com.prettyfly.mymacstatus.sidebar.test.fix1</string>
+	<key>PayloadUUID</key>
+	<string>C715C4EF-0D8A-4C21-B09F-87509CC3F39D</string>
+	<key>PayloadDisplayName</key>
+	<string>My Mac Status CE — Hide Settings and Help (RC3 Fix 1)</string>
+	<key>PayloadOrganization</key>
+	<string>My Mac Status CE</string>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadType</key>
+			<string>com.prettyfly.mymacstatus</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PayloadIdentifier</key>
+			<string>com.prettyfly.mymacstatus.sidebar.test.fix1.preferences</string>
+			<key>PayloadUUID</key>
+			<string>C715C4EF-0D8A-4C21-B09F-87509CC3F39E</string>
+			<key>PayloadDisplayName</key>
+			<string>My Mac Status CE Sidebar Controls</string>
+			<key>HideSettingsAndConnections</key>
+			<true/>
+			<key>HideHelpAndDocumentation</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

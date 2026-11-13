@@ -8,12 +8,7 @@ enum HealthStatus: String {
     case notEvaluated = "Not Checked Yet"
 
     var color: Color {
-        switch self {
-        case .healthy: return CompanionStyle.green
-        case .needsAttention: return .orange
-        case .unhealthy: return .red
-        case .unableToVerify, .notEvaluated: return .secondary
-        }
+        CompanionStyle.StatusTone(health: self).color
     }
     var symbol: String {
         switch self {

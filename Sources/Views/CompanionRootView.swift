@@ -2,29 +2,90 @@ import SwiftUI
 
 struct CompanionRootView: View {
     @EnvironmentObject private var model: CompanionModel
+    @ObservedObject private var theme = ManagedThemeManager.shared
+    @Environment(\.openSettings) private var openSettings
     private var selected: CompanionPage { model.selection ?? .dashboard }
-    var body: some View {
-        NavigationSplitView {
-            List(selection: $model.selection) {
-                Section("Your Mac") {
-                    ForEach(CompanionPage.allCases) { page in
-                        Label(page.rawValue, systemImage: page.symbol).tag(page)
+    // A native List(selection:) paints the system-blue selection background on macOS,
+    // even when .tint is set. Explicit selection rows honor managed colors instead.
+    private func sidebarPageRow(_ page: CompanionPage) -> some View {
+        let isSelected = selected == page
+        return Button {
+            model.selection = page
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: page.symbol)
+                    .foregroundStyle(isSelected ? Color.white : theme.accent)
+                Text(page.rawValue)
+                    .foregroundStyle(isSelected ? Color.white : Color.primary)
+            }
+                .frame(maxWidth: .infinity, minHeight: 22, alignment: .leading)
+                .padding(.horizontal, 7)
+                .padding(.vertical, 3)
+                .background {
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(theme.selection)
                     }
                 }
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
+    }
+
+    var body: some View {
+        NavigationSplitView {
+            List {
+                Section("Your Mac") {
+                    ForEach(CompanionPage.allCases.filter { $0 != .diagnostics }) { page in
+                        sidebarPageRow(page)
+                    }
+                }
+                Section("Troubleshooting") {
+                    sidebarPageRow(.diagnostics)
+                }
+                if !ManagedConfiguration.hideSettingsAndConnections {
+                Section("Configuration") {
+                    Button { openSettings() } label: {
+                        Label("Settings & Connections", systemImage: "gearshape")
+                            .frame(maxWidth: .infinity, minHeight: 22, alignment: .leading)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+                }
+                if !ManagedConfiguration.hideHelpAndDocumentation || !CommunityBranding.supportURL.isEmpty {
                 Section("Support") {
+                    if !ManagedConfiguration.hideHelpAndDocumentation {
                     Button { SupportService.openHelp() } label: {
                         Label("Help & Documentation", systemImage: "questionmark.circle")
                             .frame(maxWidth: .infinity, minHeight: 22, alignment: .leading)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
                     }
                     if !CommunityBranding.supportURL.isEmpty {
                         Button { SupportService.openPortal() } label: {
                             Label("Open Support Portal", systemImage: "lifepreserver")
                                 .frame(maxWidth: .infinity, minHeight: 22, alignment: .leading)
+                                .contentShape(Rectangle())
                         }
+                        .buttonStyle(.plain)
                     }
+                }
                 }
             }
             .listStyle(.sidebar)
+            .onMoveCommand { direction in
+                let pages = CompanionPage.allCases
+                guard let index = pages.firstIndex(of: selected) else { return }
+                switch direction {
+                case .up where index > 0: model.selection = pages[index - 1]
+                case .down where index < pages.count - 1: model.selection = pages[index + 1]
+                default: break
+                }
+            }
             .navigationSplitViewColumnWidth(min: 205, ideal: 235, max: 290)
         } detail: {
             VStack(spacing: 0) {
@@ -34,6 +95,7 @@ struct CompanionRootView: View {
                         Group {
                             switch selected {
                             case .dashboard: DashboardView()
+                            case .insights: DeviceInsightsView()
                             case .batteryHealth: BatteryHealthView()
                             case .macHealth: MacHealthView()
                             case .storage: StorageView()
@@ -70,6 +132,12 @@ struct CompanionRootView: View {
                 }
             }
             .toolbar {
+                if !ManagedConfiguration.hideSettingsAndConnections {
+                ToolbarItem(placement: .primaryAction) {
+                    Button { openSettings() } label: { Label("Settings & Connections", systemImage: "gearshape") }
+                        .help("Configure Jamf Pro, Iru/Kandji, Apple Business Manager, and lifecycle")
+                }
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button { model.refresh() } label: {
                         Label("Refresh Local Information", systemImage: "arrow.clockwise")
@@ -79,6 +147,7 @@ struct CompanionRootView: View {
                 }
             }
         }
+        .tint(theme.accent)
         .frame(minWidth: 850, idealWidth: 1100, minHeight: 600, idealHeight: 720)
         .onAppear { if model.lastRefresh == nil && !model.loading { model.refresh() } }
     }

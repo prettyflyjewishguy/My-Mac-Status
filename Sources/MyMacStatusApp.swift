@@ -3,11 +3,22 @@ import AppKit
 
 @main struct MyMacStatusApp: App {
     @StateObject private var model = CompanionModel()
+    @Environment(\.openWindow) private var openWindow
     var body: some Scene {
         WindowGroup {
             CompanionRootView().environmentObject(model)
         }
+        Window("About My Mac Status", id: "about-my-mac-status") {
+            AboutMyMacStatusView()
+        }
+        .windowResizability(.contentSize)
+        Settings {
+            CommunitySettingsView()
+        }
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button("About My Mac Status") { openWindow(id: "about-my-mac-status") }
+            }
             // File menu: actions available in this build, with familiar macOS shortcuts.
             CommandGroup(replacing: .newItem) {
                 Button("Show Dashboard") { model.selection = .dashboard }
@@ -28,9 +39,11 @@ import AppKit
                     .disabled(model.loading)
             }
             CommandGroup(replacing: .help) {
-                Button("My Mac Status Help") { SupportService.openHelp() }
-                    .keyboardShortcut("?", modifiers: [.command])
-                Divider()
+                if !ManagedConfiguration.hideHelpAndDocumentation {
+                    Button("My Mac Status Help") { SupportService.openHelp() }
+                        .keyboardShortcut("?", modifiers: [.command])
+                    Divider()
+                }
                 if !CommunityBranding.supportURL.isEmpty {
                     Button("Open Support Portal") { SupportService.openPortal() }
                 }

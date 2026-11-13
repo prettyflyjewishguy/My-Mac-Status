@@ -19,7 +19,7 @@
 zsh Scripts/validate_on_mac.zsh
 ```
 
-Build outputs under `output/` and `validation-results/` are not intended for version control. The current build targets Apple silicon macOS 14+, uses an ad-hoc app signature and an unsigned PKG. The bundle identifier is still `org.example.mymacstatus` and must be selected before distributing installable binaries; changing it is outside the frozen Alpha 2 scope.
+Build outputs under `output/` and `validation-results/` are not intended for version control. The current build targets Apple silicon macOS 14+, uses an ad-hoc app signature and an unsigned PKG. The bundle identifier is still `com.prettyfly.mymacstatus` and must be selected before distributing installable binaries; changing it is outside the frozen Alpha 2 scope.
 
 ## Suggested release notes
 

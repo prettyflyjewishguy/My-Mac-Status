@@ -4,7 +4,7 @@ enum BatteryPresentation {
     static func color(_ condition: String) -> Color {
         let lower = condition.lowercased()
         if lower.contains("service") || lower.contains("replace") || lower.contains("poor") { return .orange }
-        if lower == "normal" || lower == "good" { return CompanionStyle.green }
+        if lower == "normal" || lower == "good" { return CompanionStyle.StatusTone.healthy.color }
         return .secondary
     }
     static func symbol(_ condition: String) -> String {
@@ -47,7 +47,7 @@ struct BatteryHealthView: View {
             InfoPanel {
                 HStack(spacing: 20) {
                     Image(systemName: batterySymbol).font(.system(size: 43, weight: .light))
-                        .foregroundStyle(CompanionStyle.green).frame(width: 70)
+                        .foregroundStyle(CompanionStyle.blue).frame(width: 70)
                     VStack(alignment: .leading, spacing: 4) {
                         Text(battery.headline).font(.system(size: 43, weight: .bold, design: .rounded))
                         Text("Current charge").font(.subheadline).foregroundStyle(.secondary)
@@ -81,14 +81,14 @@ struct BatteryHealthView: View {
                         .font(.headline)
                     Text("Maximum Capacity compares the battery's current charge capacity with its original capacity. Cycle Count reflects cumulative battery use, not the number of times you plugged in your Mac.")
                         .foregroundStyle(.secondary)
-                    Text("macOS determines battery condition. If it reports a service warning or charging seems unusual, use Get help below.")
+                    Text("macOS determines battery condition. If it reports a service warning or charging seems unusual, review Battery settings or contact Apple Support.")
                         .foregroundStyle(.secondary)
                 }
             }
             InfoPanel {
                 HStack(spacing: 12) {
                     Image(systemName: "info.circle.fill")
-                        .foregroundStyle(CompanionStyle.green)
+                        .foregroundStyle(CompanionStyle.StatusTone.informational.color)
                         .accessibilityHidden(true)
                     Text(battery.advice)
                         .font(.callout)
@@ -98,7 +98,7 @@ struct BatteryHealthView: View {
                         .buttonStyle(.plain)
                         .foregroundStyle(.blue)
                         .font(.callout.weight(.medium))
-                        .accessibilityLabel("Get help from the support team")
+                        .accessibilityLabel("Open the configured support resource")
                     }
                 }
             }

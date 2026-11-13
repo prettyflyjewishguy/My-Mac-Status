@@ -15,39 +15,51 @@ Native macOS utility for understanding Mac health, security, battery, storage, h
 
 ## Screenshots
 
-Screenshots from My Mac Status CE 2.0 on macOS. The app supports light and dark appearances; organization branding and accent colors may vary with MDM configuration.
+Screenshots from My Mac Status CE 2.0 on macOS. The application supports light and dark appearances; organization branding and accent colors may vary with MDM configuration.
 
-### At a glance
+### Overview dashboard
 
-<p align="center">
-  <img src="Screenshots/overview.png" alt="My Mac Status Overview dashboard" width="100%">
-</p>
+![Overview dashboard](Screenshots/overview.png)
 
-### Explore the features
+### Health & Security with macOS Update Intelligence
 
-| Device Insights | Health & Security |
-|:---:|:---:|
-| <img src="Screenshots/device-insights.png" alt="Device Insights" width="100%"> | <img src="Screenshots/health-security-overview.png" alt="Health and Security status cards" width="100%"> |
-| **Battery** | **Storage** |
-| <img src="Screenshots/battery.png" alt="Battery health and power" width="100%"> | <img src="Screenshots/storage.png" alt="Storage overview and home-folder analysis" width="100%"> |
-| **Diagnostics** | **macOS Update Intelligence** |
-| <img src="Screenshots/diagnostics.png" alt="Read-only diagnostics" width="100%"> | <img src="Screenshots/health-security-update-intelligence.png" alt="macOS Update Intelligence" width="100%"> |
-| **Settings & Connections** | |
-| <img src="Screenshots/settings-connections.png" alt="Optional provider connections" width="100%"> | Optional Jamf Pro, Iru/Kandji, and Apple Business Manager integrations. The app works without a connection. |
+![Health & Security with macOS Update Intelligence](Screenshots/health-security-update-intelligence.png)
 
-<details>
-<summary><strong>Additional screenshots — Help & Documentation (3 images)</strong></summary>
+### Optional provider connections
 
-#### Getting Started
-<img src="Screenshots/help-getting-started.png" alt="Getting Started help" width="100%">
+![Optional provider connections](Screenshots/settings-connections.png)
 
-#### macOS Update Intelligence help
-<img src="Screenshots/help-update-intelligence.png" alt="macOS Update Intelligence help" width="100%">
+### Help — Getting Started
 
-#### Optional Connections help
-<img src="Screenshots/help-optional-connections.png" alt="Optional Connections help" width="100%">
+![Help — Getting Started](Screenshots/help-getting-started.png)
 
-</details>
+### Help — macOS Update Intelligence
+
+![Help — macOS Update Intelligence](Screenshots/help-update-intelligence.png)
+
+### Help — Optional Connections
+
+![Help — Optional Connections](Screenshots/help-optional-connections.png)
+
+### Battery
+
+![Battery](Screenshots/battery.png)
+
+### Storage
+
+![Storage](Screenshots/storage.png)
+
+### Health & Security — status cards
+
+![Health & Security — status cards](Screenshots/health-security-overview.png)
+
+### Device Insights
+
+![Device Insights](Screenshots/device-insights.png)
+
+### Diagnostics
+
+![Diagnostics](Screenshots/diagnostics.png)
 
 ## Build
 On a Mac with Xcode command-line tools and the macOS SDK:
@@ -60,7 +72,7 @@ zsh Scripts/validate_on_mac.zsh
 Build metadata: **2.0 (2000)**; bundle identifier **`com.prettyfly.mymacstatus`**. Build outputs and signing requirements are determined by the included scripts. The source archive is **not** a signed or notarized installer.
 
 ## Managed deployment
-Read [ADMIN_DEPLOYMENT.md](ADMIN_DEPLOYMENT.md) before distributing. A complete, editable sample profile is at [`ManagedDeployment/v2.0-Consolidated-Branding-Example.mobileconfig`](ManagedDeployment/v2.0-Consolidated-Branding-Example.mobileconfig). Replace all example image URLs. Never put API tokens or passwords in configuration profiles.
+Read [ADMIN_DEPLOYMENT.md](ADMIN_DEPLOYMENT.md) before distributing. A complete, editable sample profile is at [`ManagedDeployment/Managed-Branding-Example.mobileconfig`](ManagedDeployment/Managed-Branding-Example.mobileconfig). Replace all example image URLs. Never put API tokens or passwords in configuration profiles.
 
 ## Privacy and limitations
 Local diagnostics are informational/read-only; home-folder scans do not remove files. Optional provider requests require administrator-supplied access and network connectivity. Profile updates and credential migration should be tested on real Macs before fleet deployment. See [RELEASE_NOTES_v2.0.md](RELEASE_NOTES_v2.0.md) and [GA_VALIDATION_CHECKLIST.md](GA_VALIDATION_CHECKLIST.md).

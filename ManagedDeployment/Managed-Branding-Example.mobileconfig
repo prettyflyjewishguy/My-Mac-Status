@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>PayloadIdentifier</key>
+	<string>com.prettyfly.mymacstatus.ga.branding.example</string>
+	<key>PayloadUUID</key>
+	<string>893dc0b1-a0bb-4a6c-bd90-d17d2d0fd966</string>
+	<key>PayloadDisplayName</key>
+	<string>My Mac Status CE 2.0 — Managed Branding</string>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>BrandingEnabled</key>
+			<true/>
+			<key>BrandingImageURL</key>
+			<string>https://assets.example.com/brand/logo.png</string>
+			<key>BrandingImageURLLight</key>
+			<string>https://assets.example.com/brand/logo-light.png</string>
+			<key>BrandingImageURLDark</key>
+			<string>https://assets.example.com/brand/logo-dark.png</string>
+			<key>BrandingImageWidth</key>
+			<integer>165</integer>
+			<key>BrandingImageHeight</key>
+			<integer>48</integer>
+			<key>BrandPrimaryColor</key>
+			<string>#00D15F</string>
+			<key>BrandSecondaryColor</key>
+			<string>#008F47</string>
+			<key>BrandAccentColor</key>
+			<string>#00D15F</string>
+			<key>BrandSelectionColor</key>
+			<string>#008F47</string>
+			<key>HideSettingsAndConnections</key>
+			<true/>
+			<key>HideHelpAndDocumentation</key>
+			<true/>
+			<key>PayloadType</key>
+			<string>com.prettyfly.mymacstatus</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PayloadIdentifier</key>
+			<string>com.prettyfly.mymacstatus.ga.branding</string>
+			<key>PayloadUUID</key>
+			<string>06aa977b-d999-4b04-9a90-40c7f726d027</string>
+			<key>PayloadEnabled</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

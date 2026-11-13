@@ -29,7 +29,7 @@ Deploy a **Custom Settings / preference domain** configuration using a forced MD
 **All branding options are present in the consolidated sample** except `BrandingImageBase64`, which is intentionally documented but omitted from the sample payload: a placeholder Base64 value would override working hosted logo URLs. To use embedded branding, add the key with actual encoded image bytes; remove URL keys if unnecessary.
 
 ## 3. Consolidated sample profile
-`ManagedDeployment/v2.0-Consolidated-Branding-Example.mobileconfig` includes all four colors, logo URL variants, image dimensions, and both visibility controls. Replace `assets.example.com` with your HTTPS image host before installing. Adjust colors for contrast in both appearances. For user-accessible Settings/Help, change the two `Hide...` values to false. Logo branding never replaces the native window title or toolbar.
+`ManagedDeployment/Managed-Branding-Example.mobileconfig` includes all four colors, logo URL variants, image dimensions, and both visibility controls. Replace `assets.example.com` with your HTTPS image host before installing. Adjust colors for contrast in both appearances. For user-accessible Settings/Help, change the two `Hide...` values to false. Logo branding never replaces the native window title or toolbar.
 
 ## 4. Lifecycle and reactive behavior
 The theme manager checks for forced preference changes about every 15 seconds and when the app becomes active; brand colors should update without a restart. Removing the managed profile restores default colors and sidebar behavior. Verify actual image refresh separately: logo downloading/caching follows its own code path and may not hot-reload on profile changes.

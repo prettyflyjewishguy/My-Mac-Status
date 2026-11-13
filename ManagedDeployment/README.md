@@ -1,17 +1,32 @@
-# RC3 Managed Preferences — foundation only
+# Managed Deployment — My Mac Status Community Edition 2.0 GA
 
-Bundle / preferences domain: `com.prettyfly.mymacstatus` (matches the existing build script). Deploy the example `.mobileconfig` through MDM after replacing example URLs and identifiers. The sample hides Settings & Connections in the sidebar and toolbar; if the Settings window is opened by another route, it shows a managed notice instead of editable controls.
+The app uses the managed preferences domain **`com.prettyfly.mymacstatus`**. These example configuration profiles are intended for deployment through an MDM solution such as Jamf Pro or Microsoft Intune. Replace example URLs, organization identifiers, and profile identifiers before production deployment.
 
-## Keys (MDM-forced values only)
-- `HideSettingsAndConnections` (Boolean): hide settings UI; default false.
-- `HideHelpAndDocumentation` (Boolean): hide Help & Documentation sidebar entry, Help menu command/shortcut, and About-window Help button; default false. Other support links remain available when configured.
-- `ConnectorURL` (HTTPS string): reserved for the future self-hosted connector; no network connection is implemented in RC3.
-- `JamfProURL`, `IruTenantURL` (HTTPS strings): metadata reserved for future managed integrations.
-- `ABMOrganizationID` (String): metadata reserved for future managed integrations.
+## Profiles
 
-**Security:** Do not deploy API tokens, client secrets, ABM private keys or passwords in profiles. RC3 does **not** automatically authenticate to Jamf, Iru, or ABM, and does **not** implement the connector. Existing manual integrations remain unchanged. MDM must install these as *forced* managed preferences; ordinary defaults are ignored by this managed configuration reader. Removing the profile restores sidebar visibility. The v2.0 bundle ID is `com.prettyfly.mymacstatus`. Replace all previously deployed `org.example.mymacstatus` profiles with new-domain profiles.
+| File | Purpose |
+| --- | --- |
+| `Managed-Branding-Example.mobileconfig` | **Authoritative GA branding example**. Includes all supported branding image, sizing, color, and sidebar-visibility options in one profile. |
+| `Managed-Preferences-Example.mobileconfig` | Example managed metadata and visibility preferences; placeholder connector/provider URLs are informational, not credentials. |
+| `Sidebar-Visibility-Example.mobileconfig` | Minimal example that hides Settings & Connections and Help & Documentation. |
 
-**Validation on a Mac:** build with `zsh Scripts/build_on_mac.zsh`; verify unmanaged settings visible; install profile with MDM, relaunch app, verify sidebar and toolbar settings hidden, direct Settings shows notice; remove profile and relaunch, verify settings return. Test light/dark modes and navigation. Build has not been compiled in this environment.
+## Branding options
 
-## RC3 Fix 1 testing
-Deploy `Sidebar-Hide-Settings-And-Help-Test.mobileconfig` as a forced MDM profile, relaunch the app, and verify both sidebar entries are absent. Check that Command-? does not open Help, the Help menu has no My Mac Status Help action, and the About window has no Help button. Remove the profile, relaunch, and confirm both items return. The Help window is also guarded against programmatic opening while managed.
+The authoritative branding profile includes `BrandingEnabled`, `BrandingImageURL`, `BrandingImageURLLight`, `BrandingImageURLDark`, `BrandingImageWidth`, `BrandingImageHeight`, `BrandPrimaryColor`, `BrandSecondaryColor`, `BrandAccentColor`, `BrandSelectionColor`, `HideSettingsAndConnections`, and `HideHelpAndDocumentation`.
+
+Image URLs must be accessible to the target Mac. Color values use hexadecimal RGB notation (for example, `#008F47`). Replace all sample branding values with your organization's approved assets and colors. The generic image URL is a fallback where the appearance-specific image is not used.
+
+## Managed preferences
+
+`HideSettingsAndConnections` and `HideHelpAndDocumentation` are Boolean values. `ConnectorURL`, `JamfProURL`, and `IruTenantURL` are example HTTPS metadata strings; `ABMOrganizationID` is an example organization identifier. These metadata fields do not themselves establish authentication or configure a working provider connection.
+
+**Do not put passwords, API client secrets, bearer tokens, or private keys in configuration profiles.** Provider credentials, where supported, belong in the user's macOS Keychain.
+
+## Deployment and validation
+
+1. Choose **one** example profile as the starting point; do not install all three simultaneously, since they share the same preferences domain and overlapping keys.
+2. Customize values and ensure the profile's top-level and nested `PayloadIdentifier` values are unique to your organization. Deploy as forced managed preferences using your MDM.
+3. Relaunch My Mac Status and confirm branding and sidebar visibility in both light and dark appearance. Verify selection contrast and navigation on each sidebar page.
+4. Remove the test profile, relaunch, and confirm that unmanaged defaults return. Validate the exact deployed profile and your signing/notarization workflow on a Mac before GA rollout.
+
+For broader deployment guidance, see [`../ADMIN_DEPLOYMENT.md`](../ADMIN_DEPLOYMENT.md) and [`../docs/BRANDING.md`](../docs/BRANDING.md).

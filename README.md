@@ -15,51 +15,42 @@ Native macOS utility for understanding Mac health, security, battery, storage, h
 
 ## Screenshots
 
-Screenshots from My Mac Status CE 2.0 on macOS. The application supports light and dark appearances; organization branding and accent colors may vary with MDM configuration.
+Screenshots from My Mac Status CE 2.0 on macOS. The app supports light and dark appearances; organization branding and accent colors may vary with MDM configuration.
 
-### Overview dashboard
+### At a glance
 
-![Overview dashboard](Screenshots/overview.png)
+<p align="center">
+  <img src="Screenshots/overview.png" alt="My Mac Status Overview dashboard" width="100%">
+</p>
 
-### Health & Security with macOS Update Intelligence
+### Explore the features
 
-![Health & Security with macOS Update Intelligence](Screenshots/health-security-update-intelligence.png)
+| Device Insights | Health & Security |
+|:---:|:---:|
+| <img src="Screenshots/device-insights.png" alt="Device Insights" width="100%"> | <img src="Screenshots/health-security-overview.png" alt="Health and Security status cards" width="100%"> |
+| **Battery** | **Storage** |
+| <img src="Screenshots/battery.png" alt="Battery health and power" width="100%"> | <img src="Screenshots/storage.png" alt="Storage overview and home-folder analysis" width="100%"> |
+| **Diagnostics** | **macOS Update Intelligence** |
+| <img src="Screenshots/diagnostics.png" alt="Read-only diagnostics" width="100%"> | <img src="Screenshots/health-security-update-intelligence.png" alt="macOS Update Intelligence" width="100%"> |
 
-### Optional provider connections
 
-![Optional provider connections](Screenshots/settings-connections.png)
+### Settings & Connections
 
-### Help — Getting Started
+<p align="center"><img src="Screenshots/settings-connections.png" alt="Optional management provider connections" width="85%"></p>
 
-![Help — Getting Started](Screenshots/help-getting-started.png)
+<details>
+<summary><strong>Additional screenshots — Help & Documentation (3 images)</strong></summary>
 
-### Help — macOS Update Intelligence
+#### Getting Started
+<img src="Screenshots/help-getting-started.png" alt="Getting Started help" width="100%">
 
-![Help — macOS Update Intelligence](Screenshots/help-update-intelligence.png)
+#### macOS Update Intelligence help
+<img src="Screenshots/help-update-intelligence.png" alt="macOS Update Intelligence help" width="100%">
 
-### Help — Optional Connections
+#### Optional Connections help
+<img src="Screenshots/help-optional-connections.png" alt="Optional Connections help" width="100%">
 
-![Help — Optional Connections](Screenshots/help-optional-connections.png)
-
-### Battery
-
-![Battery](Screenshots/battery.png)
-
-### Storage
-
-![Storage](Screenshots/storage.png)
-
-### Health & Security — status cards
-
-![Health & Security — status cards](Screenshots/health-security-overview.png)
-
-### Device Insights
-
-![Device Insights](Screenshots/device-insights.png)
-
-### Diagnostics
-
-![Diagnostics](Screenshots/diagnostics.png)
+</details>
 
 ## Build
 On a Mac with Xcode command-line tools and the macOS SDK:

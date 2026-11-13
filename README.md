@@ -1,3 +1,5 @@
+![My Mac Status — Know your Mac at a glance](Screenshots/readme-banner.jpeg)
+
 # My Mac Status — Community Edition 2.0
 
 Native macOS utility for understanding Mac health, security, battery, storage, hardware, update readiness, and estimated replacement lifecycle. **macOS 14 or newer; Apple silicon build target.** Open-source under the MIT license.
@@ -38,6 +40,26 @@ Screenshots from My Mac Status CE 2.0 on macOS. The application supports light a
 ### Help — Optional Connections
 
 ![Help — Optional Connections](Screenshots/help-optional-connections.png)
+
+### Battery
+
+![Battery](Screenshots/battery.png)
+
+### Storage
+
+![Storage](Screenshots/storage.png)
+
+### Health & Security — status cards
+
+![Health & Security — status cards](Screenshots/health-security-overview.png)
+
+### Device Insights
+
+![Device Insights](Screenshots/device-insights.png)
+
+### Diagnostics
+
+![Diagnostics](Screenshots/diagnostics.png)
 
 ## Build
 On a Mac with Xcode command-line tools and the macOS SDK:
